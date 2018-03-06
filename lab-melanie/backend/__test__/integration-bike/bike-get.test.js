@@ -17,10 +17,6 @@ describe('GET', function() {
       return mock.bike.createMany(5)
         .then(res => this.bikeData = res);
     });
-    it('should return an array of ids', () => {
-      return superagent.get(':4000/api/v1/bike')
-        .then(res => expect(res.body).toBeInstanceOf(Array));
-    });
     it('should return a status 200 given a valid ID', () => {
       return superagent.get(`:4000/api/v1/bike/${this.bikeData.bikes[0]._id}`)
         .then(res => expect(res.status).toEqual(200));

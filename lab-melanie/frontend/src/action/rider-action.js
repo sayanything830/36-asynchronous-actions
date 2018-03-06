@@ -35,3 +35,16 @@ export const riderCreateRequest = rider => (dispatch, getState) => {
     .then(res => dispatch(riderCreate(res.body)))
     .catch(logError);
 };
+
+export const riderUpdateRequest = rider => (dispatch, getState) => {
+  return superagent.put(`${__API_URL__}/api/v1/rider/${rider._id}`)
+    .send(rider)
+    .then(res => dispatch(riderUpdate(res.body)))
+    .catch(logError);
+};
+
+export const riderDeleteRequest = rider => (dispatch, getState) => {
+  return superagent.delete(`${__API_URL__}/api/v1/rider/${rider._id}`)
+    .then(res => dispatch(riderDelete(rider)))
+    .catch(logError);
+};

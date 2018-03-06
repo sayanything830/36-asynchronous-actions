@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {
   riderFetchRequest,
   riderCreateRequest} from '../../action/rider-action';
+import RiderForm from '../rider/rider-form/index';
+import Rider from '../rider/rider-item/index';
 
 class Dashboard extends React.Component {
   componentWillMount() {
@@ -12,13 +14,18 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="dashboard-container">
-        <h1>Bikes and Riders</h1>
+        <h1>I Want to Ride my Bicycle</h1>
+
+        <RiderForm
+          buttonText="Add a Rider"
+          onComplete={this.props.createRider} />
 
         {this.props.riders ?
           this.props.riders.map(rider =>
             <div key={rider._id}>
-              {/* <span onClick={() => this.props.deleteAlbum(album)}>x</span> */}
-              <p>{rider.name}</p>
+              <Rider
+                rider={rider}
+                buttonText="Delete Rider" />
             </div>)
           :
           undefined
@@ -35,7 +42,6 @@ let mapStateToProps = state => ({
 let mapDispatchToProps = dispatch => ({
   fetchRiders: () => dispatch(riderFetchRequest()),
   createRider: rider => dispatch(riderCreateRequest(rider)),
-  // deleteRider: rider => dispatch(riderDeleteRequest(rider)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

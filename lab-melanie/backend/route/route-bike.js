@@ -7,7 +7,7 @@ const errorHandler = require('../lib/error-handler.js');
 module.exports = function(router) {
   router.route('/bike/:_id?')
     .get((req, res) => {
-      
+
       if(req.params._id) {
         return Bike.findById(req.params._id)
           .populate('rider')
@@ -15,7 +15,7 @@ module.exports = function(router) {
           .catch(err => errorHandler(err, res));
       }
       return Bike.find()
-        .then(bike => bike.map(bike => bike._id))
+        // .then(bike => bike.map(bike => bike._id))
         .then(bike => res.status(200).json(bike))
         .catch(err => errorHandler(err, res));
     })

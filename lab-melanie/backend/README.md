@@ -2,7 +2,7 @@
 This app creates, reads, updates, and deletes files using MongoDB as it's database and Mongoose as middleware.
 
 ---
-## Intalling and Getting Started
+## Installing and Getting Started
 To use this app, for and git clone this repository to your local computer. Navigate to the `lab-melanie` directory and enter `npm install` in your command line, this will install all necessary dependencies.
 
 Either use the Postman app or Httpie to have the ability to create and modify bikes. The following examples will be demonstrated with Httpie.
@@ -28,7 +28,7 @@ http POST :3000/api/v1/bike year=<year> color=<color> make=<make> category=<cate
 ```
 Be sure to use single quotes if the descriptions contain more than one word.
 
-If your filepath is incorrect, you will recieve an error message, otherwise you will see a status code of 201.
+If your filepath is incorrect, you will receive an error message, otherwise you will see a status code of 201.
 
 #### Get a Bike (or all bikes)
 To get a specific bike, type in your command line:
@@ -90,7 +90,7 @@ This contains five methods that routes requests and responses from storage:
 ---
 
 ## Tests
-The test directory is separated into four subdirectories: 
+The test directory is separated into four subdirectories:
 
 `integration-bike` contains files to test each http method, `POST`, `GET`, `PUT`, `DELETE`.
 

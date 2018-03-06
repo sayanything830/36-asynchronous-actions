@@ -3,6 +3,8 @@ let validateRider = payload => {
   if(!payload.name) throw new Error('VALIDATION ERROR. Rider must have name');
 };
 
+const initialState = [];
+
 export default (state=[], action) => {
   let {type, payload} = action;
   // validateAlbum(payload) // Reminder that we can't do this in every case, so it's situational.
@@ -18,6 +20,8 @@ export default (state=[], action) => {
   case 'RIDER_DELETE':
     validateRider(payload);
     return state.filter(rider => rider._id !== payload._id);
+  case 'RIDER_RESET':
+    return initialState;
   default: return state;
   }
 };

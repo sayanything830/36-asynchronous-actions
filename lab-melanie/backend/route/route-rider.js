@@ -7,14 +7,14 @@ const errorHandler = require('../lib/error-handler.js');
 module.exports = function(router) {
   router.route('/rider/:_id?')
     .get((req, res) => {
-      
+
       if(req.params._id) {
         return Rider.findById(req.params._id)
           .then(rider => res.status(200).json(rider))
           .catch(err => errorHandler(err, res));
       }
       return Rider.find()
-        .then(rider => rider.map(a => ({_id: a._id, name: a.name})))
+        // .then(rider => rider.map(a => ({_id: a._id, name: a.name})))
         .then(rider => res.status(200).json(rider))
         .catch(err => errorHandler(err, res));
     })
