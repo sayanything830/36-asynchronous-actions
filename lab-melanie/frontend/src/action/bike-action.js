@@ -38,7 +38,7 @@ export const bikeCreateRequest = bike => (dispatch, getState) => {
 export const bikeUpdateRequest = bike => (dispatch, getState) => {
   return superagent.put(`${__API_URL__}/api/v1/bike/${bike._id}`)
     .send(bike)
-    .then(res => dispatch(bikeUpdate(res.body)))
+    .then(res => dispatch(bikeUpdate(bike)))
     .catch(logError);
 };
 

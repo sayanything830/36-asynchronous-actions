@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {riderUpdateRequest, riderDeleteRequest} from '../../../action/rider-action';
-import {bikeCreateRequest} from '../../../action/bike-action';
+import {bikeCreateRequest, bikeFetchRequest} from '../../../action/bike-action';
 import {renderIf} from '../../../lib/utils';
 import RiderForm from '../rider-form/index';
 import BikeForm from '../../bike/bike-form/index';
@@ -37,6 +37,10 @@ class Rider extends React.Component {
 
   handleDelete() {
     this.props.riderDelete(this.state);
+  }
+
+  componentWillMount() {
+    this.props.fetchBikes();
   }
 
   render() {
@@ -76,6 +80,7 @@ const mapDispatchToProps = (dispatch) => ({
   riderUpdate: rider => dispatch(riderUpdateRequest(rider)),
   riderDelete: rider => dispatch(riderDeleteRequest(rider)),
   createBike: bike => dispatch(bikeCreateRequest(bike)),
+  fetchBikes: () => dispatch(bikeFetchRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Rider);

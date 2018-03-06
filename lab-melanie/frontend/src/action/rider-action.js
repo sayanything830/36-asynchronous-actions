@@ -39,7 +39,7 @@ export const riderCreateRequest = rider => (dispatch, getState) => {
 export const riderUpdateRequest = rider => (dispatch, getState) => {
   return superagent.put(`${__API_URL__}/api/v1/rider/${rider._id}`)
     .send(rider)
-    .then(res => dispatch(riderUpdate(res.body)))
+    .then(res => dispatch(riderUpdate(rider)))
     .catch(logError);
 };
 
