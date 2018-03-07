@@ -39,10 +39,6 @@ class Rider extends React.Component {
     this.props.riderDelete(this.state);
   }
 
-  componentWillMount() {
-    this.props.fetchBikes();
-  }
-
   render() {
     return (
       <div className="rider-item" key={this.props.rider._id}>
@@ -67,6 +63,12 @@ class Rider extends React.Component {
           :
           undefined
         }
+        {/* {this.props.bikes[0] ? this.props.bikes.map(bike =>
+          <Bike key={bike._id} buttonText="Delete Bike" bike={bike} />
+        )
+          :
+          undefined
+        } */}
       </div>
     );
   }
@@ -80,7 +82,6 @@ const mapDispatchToProps = (dispatch) => ({
   riderUpdate: rider => dispatch(riderUpdateRequest(rider)),
   riderDelete: rider => dispatch(riderDeleteRequest(rider)),
   createBike: bike => dispatch(bikeCreateRequest(bike)),
-  fetchBikes: () => dispatch(bikeFetchRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Rider);
