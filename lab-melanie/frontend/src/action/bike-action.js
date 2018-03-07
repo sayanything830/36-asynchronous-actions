@@ -28,23 +28,23 @@ export const bikeFetchRequest = () => dispatch => {
     .catch(logError);
 };
 
-export const bikeCreateRequest = bike => (dispatch, getState) => {
+export const bikeCreateRequest = bike => (dispatch) => {
   return superagent.post(`${__API_URL__}/api/v1/bike`)
     .send(bike)
     .then(res => dispatch(bikeCreate(res.body)))
     .catch(logError);
 };
 
-export const bikeUpdateRequest = bike => (dispatch, getState) => {
-  return superagent.put(`${__API_URL__}/api/v1/bike/${bike._id}`)
+export const bikeUpdateRequest = bike => (dispatch) => {
+  return superagent.put(`${__API_URL__}/api/v1/bike/`)
     .send(bike)
-    .then(res => dispatch(bikeUpdate(bike)))
+    .then(() => dispatch(bikeUpdate(bike)))
     .catch(logError);
 };
 
-export const bikeDeleteRequest = bike => (dispatch, getState) => {
+export const bikeDeleteRequest = bike => (dispatch) => {
   return superagent.delete(`${__API_URL__}/api/v1/bike/${bike._id}`)
-    .then(res => dispatch(bikeDelete(bike)))
+    .then(() => dispatch(bikeDelete(bike)))
     .catch(logError);
 };
 

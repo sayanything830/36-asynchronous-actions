@@ -11,6 +11,17 @@ const Bike = mongoose.Schema({
   'rider': {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'riders'},
 }, {timestamps: true});
 
+// Bike.pre('save', function(next) {
+//   Rider.findById(this.rider)
+//     .then(rider => {
+//       let bikeIdSet = new Set(rider.bikes);
+//       bikeIdSet.add(this._id);
+//       rider.bikes = [...bikeIdSet];
+//     })
+//     .then(next)
+//     .catch(() => next(new Error('Validation Error. Failed to create track because Album does not exist')));
+// });
+
 Bike.pre('save', function(next) {
   Rider.findById(this.rider)
     .then(rider => {
@@ -23,15 +34,24 @@ Bike.pre('save', function(next) {
     .then(next)
     .catch(() => next(new Error('Validation Error. Failed to save Bike.')));
 });
-
 Bike.post('remove', function(doc, next) {
   Rider.findById(doc.rider)
     .then(rider => {
-      rider.bikes = rider.bikes.filter(a => a.toString() !== doc._id.toString());
-      Rider.findByIdAndUpdate(this.rider, {rider: rider.bikes});
+      rider.bikes = rider.bikes.filter(bike => bike._id !== doc._id);
+      return rider.save();
     })
     .then(next)
     .catch(next);
 });
+
+// Bike.post('remove', function(doc, next) {
+//   Rider.findById(doc.rider)
+//     .then(rider => {
+//       rider.bikes = rider.bikes.filter(a => a.toString() !== doc._id.toString());
+//       Rider.findByIdAndUpdate(this.rider, {rider: rider.bikes});
+//     })
+//     .then(next)
+//     .catch(next);
+// });
 
 module.exports = mongoose.model('bikes', Bike);

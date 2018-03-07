@@ -36,15 +36,15 @@ export const riderCreateRequest = rider => (dispatch, getState) => {
     .catch(logError);
 };
 
-export const riderUpdateRequest = rider => (dispatch, getState) => {
+export const riderUpdateRequest = rider => (dispatch) => {
   return superagent.put(`${__API_URL__}/api/v1/rider/${rider._id}`)
     .send(rider)
-    .then(res => dispatch(riderUpdate(rider)))
+    .then(() => dispatch(riderUpdate(rider)))
     .catch(logError);
 };
 
-export const riderDeleteRequest = rider => (dispatch, getState) => {
+export const riderDeleteRequest = rider => (dispatch) => {
   return superagent.delete(`${__API_URL__}/api/v1/rider/${rider._id}`)
-    .then(res => dispatch(riderDelete(rider)))
+    .then(() => dispatch(riderDelete(rider)))
     .catch(logError);
 };
