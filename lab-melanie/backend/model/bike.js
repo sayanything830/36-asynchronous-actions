@@ -37,7 +37,7 @@ Bike.pre('save', function(next) {
 Bike.post('remove', function(doc, next) {
   Rider.findById(doc.rider)
     .then(rider => {
-      rider.bikes = rider.bikes.filter(bike => bike._id !== doc._id);
+      rider.bikes = rider.bikes.filter(bike => bike.toString() !== doc._id.toString());
       return rider.save();
     })
     .then(next)
